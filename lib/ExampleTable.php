@@ -211,7 +211,7 @@ class ExampleTable extends DataManager
                         ];
 
                         $DISCOUNT_ID = \CSaleDiscount::Add($arFields);
-
+	                    Internals\DiscountTable::setAllUseCoupons('Y'); //устанавливает флаг наличия купонов для всех правил корзины
                         $currentDateTime = new DateTime();
                         $currentDateTime = $currentDateTime->format("Y-m-d H:i:s");
 
@@ -253,7 +253,7 @@ class ExampleTable extends DataManager
                         }
                         $DB->query($strSql);
                         //Создали купон
-                    } else if($info && $info['ACTIVE'] != $ACTIVE) {
+                    } else if($info && $info['ACTIVE'] != $ACTIVE && $info['COUPON'] == $COUPON) {
                         //Купон уже есть и текущая активность отличается";
                         $str = "";
                         $stringFields_tw = array("ACTIVE"=>$ACTIVE);
